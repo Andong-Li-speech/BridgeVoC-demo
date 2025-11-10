@@ -4,57 +4,104 @@
     <meta charset="UTF-8">
     <title>Anonymous Audio Demo</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* 新增样式：优化作者与单位的排版 */
         .authors-list {
             margin: 10px 0;
             line-height: 1.5;
+            text-align: center; /* 作者列表居中 */
         }
         .affiliation-list {
             margin: 10px 0;
-            padding-left: 20px; /* 缩进对齐编号 */
+            padding-left: 0; /* 移除左侧缩进 */
             line-height: 1.6;
+            text-align: center; /* 单位信息居中 */
+            list-style: none; /* 移除默认列表样式 */
         }
         .affiliation-item {
-            margin-bottom: 8px; /* 单位之间增加间距 */
+            margin-bottom: 5px;
+            display: inline-block; /* 让单位信息横向排列（如参考图） */
+            margin-right: 15px; /* 单位之间的间距 */
+        }
+        /* GitHub链接样式：居中显示在单位信息正下方 */
+        .github-link-container {
+            text-align: center; /* 容器居中 */
+            margin: 15px 0 20px; /* 上下间距 */
+        }
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            background-color: #f5f5f5;
+            color: #333;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        .github-link:hover {
+            background-color: #e9e9e9;
+        }
+        .github-link i {
+            margin-right: 8px;
+            font-size: 16px;
+            color: #24292e;
+        }
+        .abstract {
+            margin-top: 20px; /* 与GitHub链接保持距离 */
         }
     </style>
 </head>
 <body>
     <div class="page-header">
-        <h1>Submission Demo of the manuscript ``BridgeVoC: Revitalizing Neural Vocoder from a Restoration Perspective</h1>
+        <h1 style="text-align: center;">Submission Demo of the manuscript ``BridgeVoC: Revitalizing Neural Vocoder from a Restoration Perspective</h1>
         
         <div class="authors">
-            <!-- 作者列表：用数字标注所属单位 -->
             <p class="authors-list">
                 Andong Li<sup>1,2</sup>, Tong Lei<sup>3</sup>, Rilin Chen<sup>3</sup>, Kai Li<sup>4</sup>, 
                 Meng Yu<sup>3</sup>, Xiaodong Li<sup>1,2</sup>, Dong Yu<sup>3</sup>, Chengshi Zheng<sup>1,2</sup>
             </p>
             
-            <!-- 单位说明：对应数字的详细单位信息 -->
-            <div class="affiliation-list">
-                <p class="affiliation-item"><sup>1</sup> Institute of Acoustics, Chinese Academy of Sciences, Beijing, China.</p> 
-                <p class="affiliation-item"><sup>2</sup> University of Chinese Academy of Sciences, Beijing, China.</p>
-                <p class="affiliation-item"><sup>3</sup> Tencent AI Lab</p>
-                <p class="affiliation-item"><sup>4</sup> Tsinghua University, Beijing, China.</p>
-            </div>
+            <!-- 单位信息：横向排列且居中（参考示例图） -->
+            <ul class="affiliation-list">
+                <li class="affiliation-item"><sup>1</sup> Institute of Acoustics, CAS, Beijing</li>
+                <li class="affiliation-item"><sup>2</sup> Univ. of Chinese Acad. of Sci., Beijing</li>
+                <li class="affiliation-item"><sup>3</sup> Tencent AI Lab</li>
+                <li class="affiliation-item"><sup>4</sup> Tsinghua University, Beijing</li>
+            </ul>
+        </div>
+        
+        <!-- GitHub链接：在单位信息正下方，水平居中 -->
+        <div class="github-link-container">
+            <a href="https://github.com/Andong-Li-speech/BridgeVoC" target="_blank" class="github-link">
+                <i class="fab fa-github"></i>
+                Code on GitHub
+            </a>
         </div>
         
         <div class="abstract">
-            <h2>Abstract</h2>
+            <h2 style="text-align: center;">Abstract</h2>
             <p> 
-                Despite significant advances in neural vocoders using diffusion models and their variants, these methods, unfortunately, inherently suffer from a performance-inference dilemma, 
-                which stems from the iterative nature in the reverse inference process. This hurdle can heavily hinder the development of this field. To address this challenge, in this paper, we 
-                revisit the neural vocoder task through the lens of audio restoration and propose a novel diffusion vocoder called BridgeVoC. Specifically, by rank analysis, we compare the rank 
-                characteristics of Mel-spectrum with other common acoustic degradation factors, and cast the vocoder task as a specialized case of audio restoration, where the range-space spectral (RSS) 
-                surrogate of the target spectrum serves as the degraded input. Based on that, we introduce the Schrodinger bridge framework for diffusion modeling, which defines the RSS and target 
-                spectrum as dual endpoints of the stochastic generation trajectory. Further, to fully utilize the hierarchical prior of subbands in the time-frequency (T-F) domain, we elaborately 
-                devise a novel subband-aware convolutional diffusion network as the data predictor, where subbands are divided following an uneven strategy, and convolutional-style attention module 
-                is employed with large kernels for efficient T-F contextual modeling. To enable single-step inference, we propose an omnidirectional distillation loss to facilitate effective
-                information transfer from the teacher to student models, and the performance is improved by combining target-related and bijective consistency losses. Comprehensive experiments 
-                are conducted on various benchmarks and out-of-distribution datasets. Quantitative and qualitative results show that while enjoying fewer parameters, lower computational cost and 
-                competitive inference speed, the proposed BridgeVoC yields state-of-theart performance over existing advanced GAN-, DDPM- and flow-matching-based baselines with only 4 sampling steps. And
-                consistent superiority is still achieved with single-step inference.
+                Despite significant advances in neural vocoders using diffusion models and their variants, these methods, 
+                unfortunately, inherently suffer from a \textit{performance-inference dilemma}, which stems from the iterative 
+                nature in the reverse inference process. This hurdle can severely impede the development of this field. 
+                To address this challenge, this paper revisits the neural vocoder task through the lens of audio restoration and 
+                propose a novel diffusion vocoder called BridgeVoC. Specifically, by rank analysis, we compare the rank 
+                characteristics of Mel-spectrum with other common acoustic degradation factors, and cast the vocoder task as a 
+                specialized case of audio restoration, where the range-space spectral (RSS) surrogate of the target spectrum acts 
+                as the degraded input. Based on that, we introduce the Schr\"odinger bridge framework for diffusion modeling, 
+                which defines the RSS and target spectrum as dual endpoints of the stochastic generation trajectory. Further, 
+                to fully utilize the hierarchical prior of subbands in the time-frequency (T-F) domain, we elaborately devise 
+                a novel subband-aware convolutional diffusion network as the data predictor, where subbands are divided following 
+                an uneven strategy, and convolutional-style attention module is employed with large kernels for efficient T-F 
+                contextual modeling. To enable single-step inference, we propose an omnidirectional distillation loss to facilitate 
+                effective information transfer from the teacher model to the student model, and the performance is improved by combining 
+                target-related and bijective consistency losses. Comprehensive experiments are conducted on various benchmarks and 
+                out-of-distribution datasets. Quantitative and qualitative results show that while enjoying fewer parameters, lower 
+                computational cost, and competitive inference speed, the proposed BridgeVoC yields state-of-the-art performance over 
+                existing advanced GAN-, DDPM- and flow-matching-based baselines with only 4 sampling steps. And consistent superiority 
+                is still achieved with single-step inference.
             </p>
         </div>
     </div>
